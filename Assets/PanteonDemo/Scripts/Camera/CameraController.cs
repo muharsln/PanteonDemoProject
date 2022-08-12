@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
-namespace PanteonDemo.Camera
+namespace PanteonDemo.Cam
 {
     public class CameraController : MonoBehaviour
     {

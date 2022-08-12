@@ -22,16 +22,20 @@ namespace PanteonDemo.UI
 
         private IEnumerator TimeCounter()
         {
-            while (_timeAmount > 0 && GameManager.Instance.gameStat == GameManager.GameStat.Play || GameManager.Instance.gameStat == GameManager.GameStat.Stop)
+            while (_timeAmount > -1 && GameManager.Instance.gameStat == GameManager.GameStat.Play || GameManager.Instance.gameStat == GameManager.GameStat.Stop)
             {
-                yield return new WaitForSeconds(1);
-                _timeAmount--;
-                _timeText.text = _timeAmount.ToString();
-                _timeText.transform.DOScale(_timeText.transform.localScale * 1.2f, 0.2f).OnComplete(() => _timeText.transform.DOScale(_timeText.transform.localScale / 1.2f, 0.2f));
-
                 if (_timeAmount <= 0)
                 {
                     GameManager.Instance.SetGameFailed();
+                }
+
+                yield return new WaitForSeconds(1);
+
+                if (_timeAmount > 0 && GameManager.Instance.gameStat != GameManager.GameStat.Paint)
+                {
+                    _timeAmount--;
+                    _timeText.text = _timeAmount.ToString();
+                    _timeText.transform.DOScale(_timeText.transform.localScale * 1.2f, 0.2f).OnComplete(() => _timeText.transform.DOScale(_timeText.transform.localScale / 1.2f, 0.2f));
                 }
             }
         }

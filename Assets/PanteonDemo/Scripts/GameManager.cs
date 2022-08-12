@@ -32,7 +32,7 @@ namespace PanteonDemo
 
         public void SetGameStat(GameStat stat)
         {
-            this.gameStat = stat;
+            gameStat = stat;
         }
         #endregion
 

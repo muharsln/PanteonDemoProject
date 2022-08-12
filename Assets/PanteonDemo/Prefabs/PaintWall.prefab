@@ -5172,11 +5172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb50006f122de10478e68b7f4816e6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localMovement: 1
-  _playerMoveSpeed: 5
   _minX: -4.5
+  _minY: -4.5
   _maxX: 4.5
+  _maxY: 4.5
+  _playerMoveSpeed: 0.25
   _valueText: {fileID: 9062509790637083060}
+  _paintWall: {fileID: 9062509791360429909}
 --- !u!1 &5361620813947818113
 GameObject:
   m_ObjectHideFlags: 0
@@ -5223,7 +5225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aefe15b05524d60439c640010eb12a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: {fileID: 1534845021423099694}
+  _particles: {fileID: 1534845021423099694}
 --- !u!1 &5361620815456253838
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,14 +17,14 @@ namespace PanteonDemo.Player
         [SerializeField] private GameObject _arrow;
 
         [Header("Move Referance")]
-        [SerializeField] private float _minX, _maxX;
-        [SerializeField] private float _playerMoveSpeed;
+        [SerializeField] private Camera _mainCam;
+        [SerializeField] private float _swipeSpeed, _moveSpeed;
         #endregion
 
         #region Private Field
-        // Move Referance
-        private Vector3 _firsPos, _endPos, newPos;
-        private float _posX;
+        private Rigidbody _boyRigidbody;
+        private Vector3 _firstPos, _lastPos;
+        private float _newX;
         #endregion
 
         #region Awake
@@ -37,15 +37,13 @@ namespace PanteonDemo.Player
         }
         #endregion
 
+        private void Start()
+        {
+            _boyRigidbody = GetComponent<Rigidbody>();
+        }
         #region Update
         private void Update()
         {
-            if (GameManager.Instance.gameStat == GameManager.GameStat.Play)
-            {
-                PlayerMovement();
-                SetRunAnimation(true);
-            }
-
             if (GameManager.Instance.gameStat == GameManager.GameStat.Failed)
             {
                 SetRunAnimation(false);
@@ -56,26 +54,27 @@ namespace PanteonDemo.Player
                 MoveToPulpit();
             }
 
+            if (GameManager.Instance.gameStat == GameManager.GameStat.Play)
+            {
+                PlayerMovement();
+                SetRunAnimation(true);
+            }
         }
         #endregion
 
         #region Void
         private void PlayerMovement()
         {
-            transform.position += Vector3.forward * _playerMoveSpeed * Time.deltaTime;
-
-            // Left and right movement
+            _boyRigidbody.velocity = new Vector3(_boyRigidbody.velocity.x, _boyRigidbody.velocity.y, _moveSpeed * Time.fixedDeltaTime);
             if (Input.GetMouseButtonDown(0))
             {
-                _firsPos = Input.mousePosition;
-                _posX = transform.localPosition.x;
+                _firstPos = _mainCam.ScreenToViewportPoint(Input.mousePosition);
             }
-            if (Input.GetMouseButton(0))
+            else if (Input.GetMouseButton(0))
             {
-                _endPos = Input.mousePosition;
-                newPos.x = ((_endPos.x - _firsPos.x) / (Screen.width / 4 * _playerMoveSpeed)) + _posX;
-                newPos.x = Mathf.Clamp(newPos.x, _minX, _maxX);
-                transform.localPosition = new Vector3(newPos.x, transform.localPosition.y, transform.localPosition.z);
+                _lastPos = _mainCam.ScreenToViewportPoint(Input.mousePosition);
+                _newX = Mathf.Clamp(_lastPos.x - _firstPos.x, -0.1f, 0.1f);
+                _boyRigidbody.velocity = new Vector3(_newX * _swipeSpeed * Time.fixedDeltaTime, _boyRigidbody.velocity.y, _boyRigidbody.velocity.z);
             }
         }
 
@@ -123,6 +122,11 @@ namespace PanteonDemo.Player
             if (collision.gameObject.CompareTag("Rotator"))
             {
                 GameManager.Instance.SetGameStat(GameManager.GameStat.Stop);
+            }
+
+            if (collision.gameObject.CompareTag("Water"))
+            {
+                GameManager.Instance.SetGameFailed();
             }
         }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-
+using DG.Tweening;
 namespace PanteonDemo.AI
 {
     public class AgentController : MonoBehaviour
@@ -40,13 +40,12 @@ namespace PanteonDemo.AI
             if (painting != null && GameManager.Instance.gameStat != GameManager.GameStat.Paint)
             {
                 AgentSetAnim("Victory");
-                GameManager.Instance.SetGameFailed();
+                transform.DOLocalMoveZ(transform.localPosition.z + 1, 0.5f);
+                transform.DOLocalRotate(Vector3.up * 180, 0.5f);
             }
 
             if (damaging != null)
             {
-                //_agent.isStopped = true;
-                //AgentSetAnim("Dead");
                 transform.position = _startPos;
             }
         }

@@ -311,7 +311,6 @@ GameObject:
   - component: {fileID: 2091286192}
   - component: {fileID: 1080890445}
   - component: {fileID: 2091286193}
-  - component: {fileID: 1080890446}
   - component: {fileID: 872802445}
   m_Layer: 7
   m_Name: Boy
@@ -387,18 +386,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!114 &1080890446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3496860017461262439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb4b351e0a102b4aa1caffda41b6b34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &872802445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,11 +399,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boyAnimator: {fileID: 2091286192}
-  _localMovement: 0
-  _transToMove: {fileID: 4308967395688129245}
-  _playerMoveSpeed: 0.5
+  _arrow: {fileID: 0}
   _minX: -1.25
   _maxX: 1.25
+  _playerMoveSpeed: 0.5
 --- !u!1 &3553771778990588831
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,7 +899,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0ed3e9c8a428c1746a57c542225d9e18, type: 2}
-  - {fileID: -294345951546090246, guid: 0c29db9bb4c9f35418bcc6ad5a822357, type: 3}
+  - {fileID: -1982729196843379986, guid: 0c29db9bb4c9f35418bcc6ad5a822357, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
