@@ -44,10 +44,10 @@ namespace PanteonDemo.Player
         #region Update
         private void Update()
         {
-            if (GameManager.Instance.gameStat == GameManager.GameStat.Failed)
-            {
-                SetRunAnimation(false);
-            }
+            //if (GameManager.Instance.gameStat == GameManager.GameStat.Failed)
+            //{
+            //    SetRunAnimation(false);
+            //}
 
             if (GameManager.Instance.gameStat == GameManager.GameStat.Finish)
             {
@@ -106,9 +106,9 @@ namespace PanteonDemo.Player
             if (damaging != null)
             {
                 // Burada hasar yiyince oyun failed oluyor
+                SetAnimations("Dead");
                 damaging.Damage();
                 // Dead animasyonu çalýþýyor
-                SetAnimations("Dead");
             }
 
             if (painting != null)
